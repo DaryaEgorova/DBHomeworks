@@ -1,0 +1,37 @@
+CREATE TABLE Groups (
+	ID VARCHAR(10),
+	group_number VARCHAR(12) NOT NULL,
+	faculty VARCHAR(10) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+
+
+INSERT INTO Groups (group_number, faculty) VALUES ('11-911', 'ITIS');
+INSERT INTO Groups (group_number, faculty) VALUES ('11-009', 'ITIS');
+INSERT INTO Groups (group_number, faculty) VALUES ('13.1-900', 'ISPSaMC');
+INSERT INTO Groups (group_number, faculty) VALUES ('16-003', 'EI');
+INSERT INTO Groups (group_number, faculty) VALUES ('01-612', 'IFMaB');
+SELECT * FROM Groups;
+
+
+
+CREATE TABLE Students (
+	ID VARCHAR(5),
+	name VARCHAR(15) NOT NULL,
+	age INT NOT NULL CHECK (age > 14),
+	group_ID VARCHAR(10), 
+	PRIMARY KEY (ID),
+	FOREIGN KEY (group_ID) REFERENCES Groups(ID)
+);
+
+
+
+
+INSERT INTO Students (name, age, group_ID) VALUES ('Евгений', 19, 1);
+INSERT INTO Students (name, age, group_ID) VALUES ('Лайса', 21, 2);
+INSERT INTO Students (name, age, group_ID) VALUES ('Александра', 20, 3);
+INSERT INTO Students (name, age, group_ID) VALUES ('Елизавета', 18, 4);
+INSERT INTO Students (name, age, group_ID) VALUES ('Глеб', 21, 5);
+INSERT INTO Students (name, age, group_ID) VALUES ('Владислав', 22, 6);
+SELECT * FROM Students;

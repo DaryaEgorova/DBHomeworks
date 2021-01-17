@@ -1,0 +1,64 @@
+//Таблица 7_1
+CREATE TABLE Positions (
+	ID VARCHAR(10),
+	position VARCHAR(30) NOT NULL,
+	rate VARCHAR(30) NOT NULL,
+	bonus_10exp CHAR(5) NOT NULL,
+	bonus_20exp CHAR(5) NOT NULL,
+	bonus_30exp CHAR(5) NOT NULL,
+	dirty_money CHAR(5) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO Positions (ID, position, rate, bonus_10exp, bonus_20exp, bonus_30exp, dirty_money) VALUES (1, 'Тракторист', 10000, 20000, 30000, 1500);
+INSERT INTO Positions (ID, position, rate, bonus_10exp, bonus_20exp, bonus_30exp, dirty_money) VALUES (2, 'Строитель', 1000, 2000, 3000, 1000);
+INSERT INTO Positions (ID, position, rate, bonus_10exp, bonus_20exp, bonus_30exp, dirty_money) VALUES (3, 'Рабочий', 1500, 2500, 3060, 3000);
+
+
+
+
+
+//Таблица 7_2
+CREATE TABLE Departments (
+	ID VARCHAR(10),
+	name_dep VARCHAR(30) NOT NULL,
+	code CHAR(8) NOT NULL,
+	employee VARCHAR(15) NOT NULL,
+	num_comp CHAR(8) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO Departments (ID, name_dep, code, employee, num_comp) VALUES (1, 'Договорный отдел', 4520, 'Сотрудник', '40');
+INSERT INTO Departments (ID, name_dep, code, employee, num_comp) VALUES (2, 'Рекламный отдел', 1045600, 'Начальник', '21');
+INSERT INTO Departments (ID, name_dep, code, employee, num_comp) VALUES (3, 'Отдел программного обеспечения', 753620, 'Сотрудник', '13');
+
+
+
+
+
+//Таблица 7_3
+CREATE TABLE Co_comp (
+	ID VARCHAR(10),
+	lastname VARCHAR(30) NOT NULL,
+	name VARCHAR(15) NOT NULL,
+	patronymic VARCHAR(30) NOT NULL,
+	sex CHAR(1) NOT NULL,
+	date_of_birth VARCHAR(10) NOT NULL,
+	age CHAR(2) NOT NULL,
+	code CHAR(10) NOT NULL,
+	position VARCHAR(15) NOT NULL,
+	experience CHAR(2) NOT NULL,
+	dirt VARCHAR(3) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO Co_comp (ID, lastname, name, patronymic, sex, date_of_birth, age, code, position, experience, dirt) VALUES (1, 'Иванов', 'Иван', 'Иванович', 'м', '11.11.1970', '123456', 'Бухгалтер', 'yes');
+INSERT INTO Co_comp (ID, lastname, name, patronymic, sex, date_of_birth, age, code, position, experience, dirt) VALUES (2, 'Сахно', 'Людмилла', 'Александровна', 'ж', '01.05.1992', '52014', 'Менеджер', 'no');
+INSERT INTO Co_comp (ID, lastname, name, patronymic, sex, date_of_birth, age, code, position, experience, dirt) VALUES (3, 'Смирнов', 'Евгений', 'Викторович', 'м', '13.11.2001', '7410258', 'Бариста', 'yes');
+INSERT INTO Co_comp (ID, lastname, name, patronymic, sex, date_of_birth, age, code, position, experience, dirt) VALUES (4, 'Петухова', 'Антонина', 'Яковлевна', 'ж', '22.07.1953', '46989', 'Администратор', 'no');
+
+
+
+Запросы:
+1. SELECT name_dep FROM Departments WHERE num_comp > 3000;
+2. SELECT * FROM Departments WHERE (SELECT * FROM Co_comp WHERE age > 15) AND ((SELECT dirt FROM Co_comp WHERE dirt = 'yes') OR (SELECT bonus_10exp, bonus_20exp, bonus_30exp FROM Positions WHERE bonus_10exp>0 OR bonus_20exp>0 OR bonus_30exp>0))
